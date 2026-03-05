@@ -13,11 +13,14 @@ similarity = pickle.load(open(os.path.join(BASE_DIR, "similarity.pkl"), 'rb'))
 # Recommendation function
 def recommend(movie):
     movie_index = movies[movies['title'] == movie].index[0]
+
     distances = similarity[movie_index]
 
-    movies_list = sorted(list(enumerate(distances)),
-                         reverse=True,
-                         key=lambda x: x[1])[1:6]
+    movies_list = sorted(
+        list(enumerate(distances)),
+        reverse=True,
+        key=lambda x: x[1]
+    )[1:6]
 
     recommended_movies = []
 
@@ -52,6 +55,12 @@ if st.button('Recommend'):
 
     with col4:
         st.success(names[3])
+
+    with col5:
+        st.success(names[4])
+    
+    
+
 
     with col5:
         st.success(names[4])
