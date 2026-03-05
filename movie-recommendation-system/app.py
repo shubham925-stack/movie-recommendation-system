@@ -14,6 +14,10 @@ similarity = pickle.load(open(os.path.join(BASE_DIR, "similarity.pkl"), 'rb'))
 def recommend(movie):
     movie_index = movies[movies['title'] == movie].index[0]
 
+    # Safety check
+    if movie_index >= len(similarity):
+        return ["No recommendations available for this movie"]
+
     distances = similarity[movie_index]
 
     movies_list = sorted(
