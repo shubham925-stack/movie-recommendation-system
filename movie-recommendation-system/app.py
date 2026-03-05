@@ -1,12 +1,15 @@
 import streamlit as st
 import pickle
 import pandas as pd
+import os
 
-# Load the data
-movies_dict = pickle.load(open('movies.pkl','rb'))
+# Get current directory
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+movies_dict = pickle.load(open(os.path.join(BASE_DIR, "movies.pkl"), 'rb'))
 movies = pd.DataFrame(movies_dict)
 
-similarity = pickle.load(open('similarity.pkl','rb'))
+similarity = pickle.load(open(os.path.join(BASE_DIR, "similarity.pkl"), 'rb'))
 # Recommendation function
 def recommend(movie):
     movie_index = movies[movies['title'] == movie].index[0]
